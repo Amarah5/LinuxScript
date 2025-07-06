@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Scripts Linux - Téléchargement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#6366f1',
+                            DEFAULT: '#4f46e5',
+                            dark: '#4338ca',
+                        },
+                        dark: '#0f172a',
+                        light: '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+        
+        .script-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
+            border-color: rgba(79, 70, 229, 0.5);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 8px rgba(79, 70, 229, 0.6);
+        }
+        
+        .btn-glow {
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+        }
+        
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.8);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <div class="inline-block p-3 mb-6 rounded-full bg-gradient-to-r from-primary to-purple-600">
+                <i class="fas fa-terminal text-3xl"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 glow-text">Mes Scripts Linux</h1>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                Des outils puissants pour automatiser et optimiser votre workflow sous Linux
+            </p>
+        </header>
+        
+        <div class="space-y-6">
+            <div class="script-card rounded-xl p-6">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0 self-center">
+                        <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center">
+                            <i class="fas fa-trash-alt text-3xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                            <h3 class="text-xl font-semibold text-white">
+                                <a href="uninstaller-tool/README.md" target="_blank" class="hover:text-primary-light transition-colors">
+                                    Désinstallateur Intelligent
+                                </a>
+                            </h3>
+                            <div class="flex space-x-3">
+                                <a href="uninstaller-tool/uninstaller.sh" download class="text-xs px-3 py-1 bg-primary hover:bg-primary-dark rounded-full transition-colors btn-glow">
+                                    <i class="fas fa-download mr-1"></i> Script
+                                </a>
+                                <a href="uninstaller-tool/README.md" target="_blank" class="text-xs px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full transition-colors">
+                                    <i class="fas fa-info-circle mr-1"></i> Docs
+                                </a>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            Un outil interactif pour désinstaller des logiciels via apt, snap et flatpak avec une interface intuitive.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="uninstaller-tool/uninstaller.desktop" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
+                                <i class="fas fa-desktop mr-1"></i> Lanceur
+                            </a>
+                            <a href="uninstaller-tool/uninstaller_ico.png" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
+                                <i class="fas fa-image mr-1"></i> Icône
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-16 text-center">
+            <h2 class="text-2xl font-semibold mb-4 glow-text">Contribuez au projet</h2>
+            <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+                Retrouvez l'ensemble du code source, signalez des problèmes et contribuez sur notre dépôt GitHub.
+            </p>
+            <a href="https://github.com/Amarah5/LinuxScript" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors btn-glow">
+                <i class="fab fa-github mr-2 text-xl"></i>
+                <span>Visiter le Dépôt GitHub</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
