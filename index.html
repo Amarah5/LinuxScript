@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,39 +29,40 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
         }
-        
+
         .script-card {
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .script-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
             border-color: rgba(79, 70, 229, 0.5);
         }
-        
+
         .glow-text {
             text-shadow: 0 0 8px rgba(79, 70, 229, 0.6);
         }
-        
+
         .btn-glow {
             box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
         }
-        
+
         .btn-glow:hover {
             box-shadow: 0 0 20px rgba(79, 70, 229, 0.8);
         }
     </style>
 </head>
+
 <body class="text-gray-200">
     <div class="container mx-auto px-4 py-12 max-w-4xl">
         <header class="text-center mb-16">
@@ -72,61 +74,169 @@
                 Des outils puissants pour automatiser et optimiser votre workflow sous Linux
             </p>
         </header>
-        
-        <div class="space-y-6">
-            <div class="script-card rounded-xl p-6">
-                <div class="flex flex-col md:flex-row gap-6">
-                    <div class="flex-shrink-0 self-center">
-                        <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center">
-                            <i class="fas fa-trash-alt text-3xl text-white"></i>
-                        </div>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                            <h3 class="text-xl font-semibold text-white">
-                                <a href="src/smartUninstaller/README.md" target="_blank" class="hover:text-primary-light transition-colors">
-                                    Désinstallateur Intelligent
-                                </a>
-                            </h3>
-                            <div class="flex space-x-3">
-                                <a href="src/smartUninstaller/smartUninstaller.zip" download class="text-xs px-3 py-1 bg-primary hover:bg-primary-dark rounded-full transition-colors btn-glow">
-                                    <i class="fas fa-box-archive mr-1"></i> Tout Télécharger
-                                </a>
-                                <a href="src/smartUninstaller/README.md" target="_blank" class="text-xs px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full transition-colors">
-                                    <i class="fas fa-info-circle mr-1"></i> Docs
-                                </a>
-                            </div>
-                        </div>
-                        <p class="text-gray-300 mb-4">
-                            Un outil interactif pour désinstaller des logiciels via apt, snap et flatpak avec une interface intuitive.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <a href="src/smartUninstaller/uninstaller.sh" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
-                                <i class="fas fa-file-code mr-1"></i> Script (.sh)
-                            </a>
-                            <a href="src/smartUninstaller/uninstaller.desktop" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
-                                <i class="fas fa-desktop mr-1"></i> Lanceur (.desktop)
-                            </a>
-                            <a href="src/smartUninstaller/uninstaller_ico.png" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
-                                <i class="fas fa-image mr-1"></i> Icône (.png)
-                            </a>
-                        </div>
-                    </div>
+        <main>
+
+            <div class="mb-8">
+                <input type="text" id="searchInput" placeholder="Rechercher un script..."
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-light">
+            </div>
+
+            <div id="scriptsContainer" class="space-y-6">
+            </div>
+
+            <div class="text-center mt-8">
+                <button id="viewMoreBtn"
+                    class="inline-flex items-center px-6 py-3 bg-primary hover:bg-primary-dark rounded-full transition-colors btn-glow text-white font-semibold">
+                    <i class="fas fa-arrow-down mr-2"></i> Voir plus de scripts
+                </button>
+            </div>
+        </main>
+        <footer>
+            <div class="mt-16 text-center">
+                <h2 class="text-2xl font-semibold mb-4 glow-text">Contribuez au projet</h2>
+                <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Retrouvez l'ensemble du code source, signalez des problèmes et contribuez sur notre dépôt GitHub.
+                </p>
+                <a href="https://github.com/Amarah5/LinuxScript" target="_blank"
+                    class="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors btn-glow">
+                    <i class="fab fa-github mr-2 text-xl"></i>
+                    <span>Visiter le Dépôt GitHub</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const scriptsContainer = document.getElementById("scriptsContainer");
+        const searchInput = document.getElementById("searchInput");
+        const viewMoreBtn = document.getElementById("viewMoreBtn");
+        let allScripts = [];
+        const scriptsToShowInitially = 3; // Nombre de scripts à afficher par défaut
+        let scriptsCurrentlyDisplayed = 0;
+
+        // Fonction pour créer une carte de script HTML
+        function createScriptCard(script) {
+            return `
+    <div class="script-card rounded-xl p-6">
+        <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex-shrink-0 self-center">
+                <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-primary ${script.iconBgClass
+                } flex items-center justify-center">
+                    <i class="${script.icon} text-3xl text-white"></i>
                 </div>
             </div>
-            
+            <div class="flex-grow">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                    <h3 class="text-xl font-semibold text-white">
+                        <a href="${script.docsPath
+                }" target="_blank" class="hover:text-primary-light transition-colors">
+                            ${script.name}
+                        </a>
+                    </h3>
+                    <div class="flex space-x-3">
+                        <a href="${script.zipPath
+                }" download class="text-xs px-3 py-1 bg-primary hover:bg-primary-dark rounded-full transition-colors btn-glow">
+                            <i class="fas fa-box-archive mr-1"></i> Tout Télécharger
+                        </a>
+                        <a href="${script.docsPath
+                }" target="_blank" class="text-xs px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-full transition-colors">
+                            <i class="fas fa-info-circle mr-1"></i> Docs
+                        </a>
+                    </div>
+                </div>
+                <p class="text-gray-300 mb-4">
+                    ${script.description}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    ${script.scriptPath
+                    ? `<a href="${script.scriptPath}" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
+                        <i class="fas fa-file-code mr-1"></i> Script (.sh)
+                    </a>`
+                    : ""
+                }
+                    ${script.desktopPath
+                    ? `<a href="${script.desktopPath}" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
+                        <i class="fas fa-desktop mr-1"></i> Lanceur (.desktop)
+                    </a>`
+                    : ""
+                }
+                    ${script.imagePath
+                    ? `<a href="${script.imagePath}" download class="text-xs px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors">
+                        <i class="fas fa-image mr-1"></i> Icône (.png)
+                    </a>`
+                    : ""
+                }
+                </div>
             </div>
-        
-        <div class="mt-16 text-center">
-            <h2 class="text-2xl font-semibold mb-4 glow-text">Contribuez au projet</h2>
-            <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
-                Retrouvez l'ensemble du code source, signalez des problèmes et contribuez sur notre dépôt GitHub.
-            </p>
-            <a href="https://github.com/Amarah5/LinuxScript" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors btn-glow">
-                <i class="fab fa-github mr-2 text-xl"></i>
-                <span>Visiter le Dépôt GitHub</span>
-            </a>
         </div>
-    </div>
+        `;
+        }
+
+        // Fonction pour afficher les scripts
+        function displayScripts(scriptsToDisplay) {
+            scriptsContainer.innerHTML = ""; // Vide le conteneur avant d'ajouter
+            scriptsToDisplay.forEach((script) => {
+                scriptsContainer.innerHTML += createScriptCard(script);
+            });
+            // Masque le bouton "Voir plus" si tous les scripts sont affichés
+            if (scriptsCurrentlyDisplayed >= allScripts.length) {
+                viewMoreBtn.style.display = "none";
+            } else {
+                viewMoreBtn.style.display = "inline-flex";
+            }
+        }
+
+        // Fonction pour charger plus de scripts
+        function loadMoreScripts() {
+            scriptsCurrentlyDisplayed += scriptsToShowInitially; // Charge les 3 prochains
+            const currentSearchTerm = searchInput.value.toLowerCase();
+            const filteredScripts = allScripts.filter(
+                (script) =>
+                    script.name.toLowerCase().includes(currentSearchTerm) ||
+                    script.description.toLowerCase().includes(currentSearchTerm)
+            );
+            displayScripts(filteredScripts.slice(0, scriptsCurrentlyDisplayed));
+        }
+
+        // Gestion de la recherche
+        searchInput.addEventListener("keyup", (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            scriptsCurrentlyDisplayed = scriptsToShowInitially; // Réinitialise l'affichage pour la recherche
+            const filteredScripts = allScripts.filter(
+                (script) =>
+                    script.name.toLowerCase().includes(searchTerm) ||
+                    script.description.toLowerCase().includes(searchTerm)
+            );
+            displayScripts(filteredScripts.slice(0, scriptsCurrentlyDisplayed));
+        });
+
+        // Gestion du bouton "Voir plus"
+        viewMoreBtn.addEventListener("click", loadMoreScripts);
+
+        // Chargement des scripts au démarrage
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("scripts.json")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    // Trier les scripts par date, du plus récent au plus ancien
+                    allScripts = data.sort(
+                        (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
+                    );
+                    loadMoreScripts(); // Affiche les premiers scripts
+                })
+                .catch((error) => {
+                    console.error("Erreur lors du chargement des scripts:", error);
+                    scriptsContainer.innerHTML =
+                        '<p class="text-red-400 text-center">Impossible de charger les scripts. Veuillez réessayer plus tard.</p>';
+                });
+        });
+
+    </script>
+
 </body>
+
 </html>
