@@ -1,0 +1,22 @@
+
+title: "Mahery RAZAFIMANANTSOA | Portfolio & Scripts Communautaires"
+description: "Mon portfolio personnel et une collection de scripts Linux open source."
+theme: jekyll-theme-minimal
+encoding: utf-8
+repository: Amarah5/LinuxScript 
+markdown: kramdown
+
+
+collections:
+  scripts:
+    output: true 
+    permalink: /scripts/:path/ 
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
