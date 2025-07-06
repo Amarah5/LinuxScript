@@ -1,0 +1,18 @@
+[
+  {
+    "id": "smartUninstaller",
+    "name": "Désinstallateur Intelligent",
+    "description": "Un outil interactif pour désinstaller des logiciels via apt, snap et flatpak avec une interface intuitive.",
+    "icon": "fas fa-trash-alt",
+    "iconBgClass": "to-blue-500",
+    "zipPath": "src/smartUninstaller/smartUninstaller.zip",
+    "docsPath": "src/smartUninstaller/README.md",
+    "scriptPath": "src/smartUninstaller/uninstaller.sh",
+    "desktopPath": "src/smartUninstaller/uninstaller.desktop",
+    "imagePath": "src/smartUninstaller/uninstaller_ico.png",
+    "dateAdded": "2025-07-01"
+  },
+  {
+  }
+ 
+]
