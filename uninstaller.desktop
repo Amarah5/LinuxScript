@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Désinstallateur Intelligent
+Comment=Un outil graphique pour désinstaller des logiciels (apt, snap, flatpak)
+Exec=/chemin/vers/script/uninstaller/uninstaller.sh
+Icon=/chemin/vers/script/uninstaller/uninstaller_ico.png
+Terminal=true
+Type=Application
+Categories=System;Utility;
+Keywords=uninstall;remove;apt;snap;flatpak;logiciel;outil;
+StartupNotify=true
